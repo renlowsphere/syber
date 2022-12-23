@@ -21,7 +21,7 @@ fetch('https://syberapp.sybertechnology.com/api/login', {
         'content-length': '233',
         'accept-encoding': 'gzip',
         'user-agent': 'okhttp/4.9.1',
-        agent:Agent
+       // agent:Agent
     },
     body: JSON.stringify({
         'userIdentifier': id,
@@ -49,7 +49,7 @@ fetch('https://syberapp.sybertechnology.com/api/login', {
         'content-length': '233',
         'accept-encoding': 'gzip',
         'user-agent': 'okhttp/4.9.1',
-        agent:Agent
+      //  agent:Agent
     },
     body: JSON.stringify({
         'userIdentifier': id,
@@ -77,7 +77,7 @@ fetch('https://syberapp.sybertechnology.com/api/login', {
         'content-length': '233',
         'accept-encoding': 'gzip',
         'user-agent': 'okhttp/4.9.1',
-        agent:Agent
+       // agent:Agent
     },
     body: JSON.stringify({
         'userIdentifier': id,
