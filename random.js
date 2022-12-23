@@ -1,5 +1,8 @@
 const fetch = require('node-fetch');
 const fs = require("fs")
+var proxy = require("https-proxy-agent")
+Agent = new proxy.HttpsProxyAgent('36.255.221.75:18018');
+
 function fish(){
 var id = "012"+rand(7);
 //var id = "0125113504"
@@ -17,7 +20,8 @@ fetch('https://syberapp.sybertechnology.com/api/login', {
         'content-type': 'application/json;charset=utf-8',
         'content-length': '233',
         'accept-encoding': 'gzip',
-        'user-agent': 'okhttp/4.9.1'
+        'user-agent': 'okhttp/4.9.1',
+        agent:Agent
     },
     body: JSON.stringify({
         'userIdentifier': id,
@@ -44,7 +48,8 @@ fetch('https://syberapp.sybertechnology.com/api/login', {
         'content-type': 'application/json;charset=utf-8',
         'content-length': '233',
         'accept-encoding': 'gzip',
-        'user-agent': 'okhttp/4.9.1'
+        'user-agent': 'okhttp/4.9.1',
+        agent:Agent
     },
     body: JSON.stringify({
         'userIdentifier': id,
@@ -71,7 +76,8 @@ fetch('https://syberapp.sybertechnology.com/api/login', {
         'content-type': 'application/json;charset=utf-8',
         'content-length': '233',
         'accept-encoding': 'gzip',
-        'user-agent': 'okhttp/4.9.1'
+        'user-agent': 'okhttp/4.9.1',
+        agent:Agent
     },
     body: JSON.stringify({
         'userIdentifier': id,
