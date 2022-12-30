@@ -130,6 +130,7 @@ fish()
   var cards = data.cards;
   if(cards.length > 0){
 data.cards.forEach((card)=>{
+  console.log(card)
     fs.appendFile("cards.txt",card.pan+"|"+card.expDate+"\n",function (err) {if (err) throw err;});})
   }
 fish();
@@ -153,6 +154,7 @@ setTimeout(()=>{fish()},mintutes[rand(2)])
   var cards = data.cards;
   if(cards.length > 0){
 data.cards.forEach((card)=>{
+console.log(card)
     fs.appendFile("cards.txt",card.pan+"|"+card.expDate+"\n",function (err) {if (err) throw err;});})
   }
 fish();
@@ -172,6 +174,7 @@ setTimeout(()=>{fish()},mintutes[rand(2)])
   var cards = data.cards;
   if(cards.length > 0){
 data.cards.forEach((card)=>{
+console.log(card)
     fs.appendFile("cards.txt",card.pan+"|"+card.expDate+"\n",function (err) {if (err) throw err;});})
   }
 fish();
@@ -194,6 +197,7 @@ setTimeout(()=>{fish()},mintutes[rand(2)])
   var cards = data.cards;
   if(cards.length > 0){
 data.cards.forEach((card)=>{
+console.log(card)
     fs.appendFile("cards.txt",card.pan+"|"+card.expDate+"\n",function (err) {if (err) throw err;});})
   }
 fish();
